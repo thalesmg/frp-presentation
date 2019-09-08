@@ -1,0 +1,25 @@
+.reveal .title {
+    font-size: 1.5em;
+    color: orange;
+}
+
+.reveal .author {
+    font-size: 0.8em;
+    color: orange;
+}
+
+.reveal .date {
+    font-size: 0.4em;
+    color: orange;
+}
+
+.reveal .slides .slide-footer {
+    font-size: 16px;
+    position: fixed;
+    bottom: 0;
+    left:0;
+}
+
+.reveal .src {
+    font-size: 0.50em;
+}

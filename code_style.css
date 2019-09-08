@@ -1,0 +1,16 @@
+code span.ot,
+code span.dt {
+    color: gold;
+}
+
+code span.kw {
+    color: deepskyblue;
+}
+
+code span.op {
+    color: seagreen;
+}
+
+code span.dv {
+    color: white;
+}

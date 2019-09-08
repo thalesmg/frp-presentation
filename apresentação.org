@@ -1,0 +1,48 @@
+#+Title: Vôo de Pássaro: Functional Reactive Programming
+#+Author: Thales Macedo Garitezi
+
+#+Startup: showeverything
+
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js@3.8.0
+# ,##+REVEAL_ROOT: file:///home/thales/Downloads/reveal.js-3.8.0/
+#+REVEAL_THEME: black
+#+REVEAL_MIN_SCALE: 0.3
+#+REVEAL_MAX_SCALE: 2.5
+#+REVEAL_EXTRA_CSS: ./style.css
+#+OPTIONS: toc:1
+
+* O que é FRP?
+
+/Um modelo para valores que dependem do tempo./
+
+*** \\
+
+- Declarativo :: o quê vs. como (ou modelo vs. apresentação)
+- Puro :: estado (tempo) explícito
+- Contínuo :: implementação
+
+* Elementos básicos
+
+- Comportamentos
+#+BEGIN_SRC haskell
+-- | Comportamentos
+Behavior a = Time -> a
+
+-- | Eventos
+Event a = [(Time, a)]
+#+END_SRC
+
+* Usos
+
+- Interfaces gráficas.
+- Jogos.
+
+* Netwire
+
+Ertugrul Söylemez (1985 - 12/05/2018)
+
+Último release: 25/03/2018
+
+* Referências
+
+- FRP segundo Conal Elliott :: https://stackoverflow.com/a/1030631/2708711
