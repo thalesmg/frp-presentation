@@ -20,6 +20,7 @@
 - Declarativo :: o quê vs. como (ou modelo vs. apresentação)
 - Puro :: estado (tempo) explícito
 - Contínuo :: implementação
+- Componível ::
 
 * Elementos básicos
 
@@ -46,3 +47,18 @@ Ertugrul Söylemez (1985 - 12/05/2018)
 * Referências
 
 - FRP segundo Conal Elliott :: https://stackoverflow.com/a/1030631/2708711
+- Tese do Evan Czaplicki :: https://elm-lang.org/assets/papers/concurrent-frp.pdf
+
+* Apêndice
+
+** FRP vs. CSP
+
+CSP é um formalismo para descrever sistemas concorrentes cujos
+processos que o compõem interagem através de eventos de comunicação.[fn:roscoe]
+
+Enquanto FRP descreve /comportamentos e eventos/ que dependem
+diretamente do tempo e primitivas para combiná-los em novos
+/comportamentos/, CSP descreve o /alfabeto/ que /processos/ podem usar
+para comunicar-se entre si e com o ambiente.
+
+[fn:roscoe] The theory and practice of concurrency. A. W. Roscoe, 1998.
