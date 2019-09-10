@@ -105,24 +105,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <p class="author">Thales Macedo Garitezi</p>
 </section>
 
-<section><section id="o-que-é-frp" class="title-slide slide level1"><h1>O que é FRP?</h1><p><em>Um modelo para valores que dependem do tempo.</em></p></section><section id="section" class="slide level3">
-<h3><br />
-</h3>
+<section><section id="o-que-é-frp" class="title-slide slide level1"><h1>O que é FRP?</h1><p><em>Um modelo para valores que dependem do tempo.</em></p></section><section id="criadores" class="slide level3">
+<h3>Criadores</h3>
+<p>Conal Elliott e Paul Hudak <em>Functional Reactive Animation</em>, ICFP 97.</p>
+</section><section id="características" class="slide level3">
+<h3>Características</h3>
 <dl>
-<dt>Declarativo</dt>
+<dt>Denotativa</dt>
+<dd>elementos ➡ significado
+</dd>
+<dt>Contínua</dt>
+<dd>implementação
+</dd>
+<dt>Declarativa</dt>
 <dd>o quê vs. como (ou modelo vs. apresentação)
 </dd>
-<dt>Puro</dt>
+<dt>Pura</dt>
 <dd>estado (tempo) explícito
-</dd>
-<dt>Contínuo</dt>
-<dd>implementação
 </dd>
 <dt>Componível</dt>
 <dd>
 </dd>
 </dl>
 </section></section>
+<section id="usos" class="title-slide slide level1"><h1>Usos</h1><ul>
+<li>Música <a href="#/fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> (51:16).</li>
+<li>Interfaces gráficas <a href="#/fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</li>
+<li>Robôs <a href="#/fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</li>
+<li>Jogos <a href="#/fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> <a href="#/fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</li>
+</ul></section>
 <section id="elementos-básicos" class="title-slide slide level1"><h1>Elementos básicos</h1><ul>
 <li>Comportamentos</li>
 </ul>
@@ -131,11 +142,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-3"><a href="#cb1-3"></a></span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="co">-- | Eventos</span></span>
 <span id="cb1-5"><a href="#cb1-5"></a><span class="dt">Event</span> a <span class="ot">=</span> [(<span class="dt">Time</span>, a)]</span></code></pre></div></section>
-<section id="usos" class="title-slide slide level1"><h1>Usos</h1><ul>
-<li>Interfaces gráficas.</li>
-<li>Jogos.</li>
-</ul></section>
-<section id="netwire" class="title-slide slide level1"><h1>Netwire</h1><p>Ertugrul Söylemez (1985 - 12/05/2018)</p>
+<section id="netwire" class="title-slide slide level1"><h1>Netwire</h1><p>Ertugrul Söylemez (22/09/1985 - 12/05/2018) <a href="#/fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
 <p>Último release: 25/03/2018</p></section>
 <section id="referências" class="title-slide slide level1"><h1>Referências</h1><dl>
 <dt>FRP segundo Conal Elliott</dt>
@@ -147,13 +154,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </dl></section>
 <section><section id="apêndice" class="title-slide slide level1"><h1>Apêndice</h1></section><section id="frp-vs.-csp" class="slide level2">
 <h2>FRP vs. CSP</h2>
-<p>CSP é um formalismo para descrever sistemas concorrentes cujos processos que o compõem interagem através de eventos de comunicação.<a href="#/fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>São duas abstrações para descrever sistemas dinâmicos / concorrência.</p>
+<p>CSP é um formalismo para descrever sistemas concorrentes cujos processos que o compõem interagem através de eventos de comunicação.<a href="#/fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
 <p>Enquanto FRP descreve <em>comportamentos e eventos</em> que dependem diretamente do tempo e primitivas para combiná-los em novos <em>comportamentos</em>, CSP descreve o <em>alfabeto</em> que <em>processos</em> podem usar para comunicar-se entre si e com o ambiente.</p>
 </section></section>
 <section class="footnotes" role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1" role="doc-endnote"><p>The theory and practice of concurrency. A. W. Roscoe, 1998.<a href="#/fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1" role="doc-endnote"><p><a href="https://youtu.be/xtmo6Bmfahc?t=2994">https://youtu.be/xtmo6Bmfahc?t=2994</a><a href="#/fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p><a href="https://reflex-frp.org/">https://reflex-frp.org/</a><a href="#/fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p><a href="https://link.springer.com/chapter/10.1007/978-3-540-44833-4_6">https://link.springer.com/chapter/10.1007/978-3-540-44833-4_6</a> e <a href="http://www.cs.yale.edu/homes/hudak/CS429F04/AFPLectureNotes.pdf">http://www.cs.yale.edu/homes/hudak/CS429F04/AFPLectureNotes.pdf</a><a href="#/fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p><a href="https://leanpub.com/gameinhaskell">https://leanpub.com/gameinhaskell</a><a href="#/fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5" role="doc-endnote"><p><a href="https://linearity.itch.io/peoplemon">https://linearity.itch.io/peoplemon</a><a href="#/fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6" role="doc-endnote"><p><a href="https://byorgey.wordpress.com/2018/05/21/ertugrul-soylemez-1985-2018/">https://byorgey.wordpress.com/2018/05/21/ertugrul-soylemez-1985-2018/</a><a href="#/fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7" role="doc-endnote"><p>The theory and practice of concurrency. A. W. Roscoe, 1998.<a href="#/fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
     </div>

@@ -15,12 +15,31 @@
 
 /Um modelo para valores que dependem do tempo./
 
-*** \\
+*** Criadores
 
-- Declarativo :: o quê vs. como (ou modelo vs. apresentação)
-- Puro :: estado (tempo) explícito
-- Contínuo :: implementação
+Conal Elliott e Paul Hudak
+/Functional Reactive Animation/, ICFP 97.
+
+*** Características
+
+- Denotativa :: elementos ➡ significado
+- Contínua :: implementação
+- Declarativa :: o quê vs. como (ou modelo vs. apresentação)
+- Pura :: estado (tempo) explícito
 - Componível ::
+
+* Usos
+
+- Música [fn:euterpea] (51:16).
+- Interfaces gráficas [fn:reflex].
+- Robôs [fn:hudak-arrow].
+- Jogos [fn:eulerea] [fn:yampa-game].
+
+[fn:euterpea] https://youtu.be/xtmo6Bmfahc?t=2994
+[fn:eulerea] https://leanpub.com/gameinhaskell
+[fn:yampa-game] https://linearity.itch.io/peoplemon
+[fn:reflex] https://reflex-frp.org/
+[fn:hudak-arrow] https://link.springer.com/chapter/10.1007/978-3-540-44833-4_6 e http://www.cs.yale.edu/homes/hudak/CS429F04/AFPLectureNotes.pdf
 
 * Elementos básicos
 
@@ -33,16 +52,13 @@ Behavior a = Time -> a
 Event a = [(Time, a)]
 #+END_SRC
 
-* Usos
-
-- Interfaces gráficas.
-- Jogos.
-
 * Netwire
 
-Ertugrul Söylemez (1985 - 12/05/2018)
+Ertugrul Söylemez (22/09/1985 - 12/05/2018) [fn:söylemez]
 
 Último release: 25/03/2018
+
+[fn:söylemez] https://byorgey.wordpress.com/2018/05/21/ertugrul-soylemez-1985-2018/
 
 * Referências
 
