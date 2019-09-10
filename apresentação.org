@@ -53,6 +53,8 @@ Ertugrul Söylemez (1985 - 12/05/2018)
 
 ** FRP vs. CSP
 
+São duas abstrações para descrever sistemas dinâmicos / concorrência.
+
 CSP é um formalismo para descrever sistemas concorrentes cujos
 processos que o compõem interagem através de eventos de comunicação.[fn:roscoe]
 
