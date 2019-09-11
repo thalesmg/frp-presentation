@@ -7,8 +7,8 @@ maintainer:          "example@example.com"
 copyright:           "2019 Author name here"
 
 extra-source-files:
-- README.md
-- ChangeLog.md
+  - README.md
+  - ChangeLog.md
 
 # Metadata used when publishing your package
 # synopsis:            Short description of your package
@@ -20,7 +20,12 @@ extra-source-files:
 description:         Please see the README on GitHub at <https://github.com/githubuser/frp-presentation#readme>
 
 dependencies:
-- base >= 4.7 && < 5
+  - base >= 4.7 && < 5
+  - netwire
+  - vty
+  - gloss
+  - gloss-rendering
+  - GLFW-b
 
 library:
   source-dirs: src
