@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE Arrows #-}
 
 module Main where
@@ -13,7 +14,7 @@ import qualified Graphics.UI.GLFW as GLFW
 import Control.Monad (when, unless)
 import Control.Concurrent (threadDelay)
 import FRP.Netwire (Wire, HasTime, Session, Timed, returnA, integral, clockSession_, stepSession)
-import Control.Wire (NominalDiffTime, stepWire)
+import Control.Wire (NominalDiffTime, stepWire, time, (***), (>>>))
 
 withWindow :: Int -> Int -> String -> (GLFW.Window -> IO ()) -> IO ()
 withWindow width height title f = do
@@ -45,6 +46,8 @@ width = 640
 height = 480
 pHeight = 20
 pWidth = 20
+vx0 = 20
+vy0 = 30
 
 type MyState = (Wire (Timed NominalDiffTime ()) () IO Vec Vec, Session IO (Timed NominalDiffTime ()), (Float, Float))
 type Vec = (Float, Float)
@@ -60,18 +63,17 @@ loop win state glossState = do
   esc <- keyIsPressed win GLFW.Key'Escape
   let newState = (wire', session', pos'')
   renderFrame pos'' win glossState
-  print pos''
   unless esc $ loop win newState glossState
 
 renderFrame :: Vec -> GLFW.Window -> GR.State -> IO ()
 renderFrame st win glossState = do
-  let (x, y) = st
+  let (x, y) = (realToFrac *** realToFrac) st
   GR.displayPicture (width, height) black glossState 1.0 $
     translate x y $ color orange $ rectangleSolid pHeight pWidth
   GLFW.swapBuffers win
 
 update :: (HasTime t s, MonadFix m) => Wire s () m Vec Vec
-update = proc initial -> do
+update = proc _ -> do
   a <- acceleration -< ()
   rec p <- position -< v
       v <- velocity -< a
@@ -82,8 +84,10 @@ acceleration = pure (0, 0)
 
 velocity :: (HasTime t s, Monad m) => Wire s () m Vec Vec
 velocity = proc (ax, ay) -> do
-  vx <- integral 0 -< ax
-  vy <- integral 0 -< ay
+  t  <- time -< ()
+  let t' = realToFrac t
+  vx <- integral vx0 -< t'
+  vy <- integral vy0 -< t'
   returnA -< (vx, vy)
 
 position :: (HasTime t s, Monad m) => Wire s () m Vec Vec
