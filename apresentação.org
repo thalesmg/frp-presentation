@@ -41,6 +41,23 @@ Conal Elliott e Paul Hudak
 [fn:reflex] https://reflex-frp.org/
 [fn:hudak-arrow] https://link.springer.com/chapter/10.1007/978-3-540-44833-4_6 e http://www.cs.yale.edu/homes/hudak/CS429F04/AFPLectureNotes.pdf
 
+* Variações
+
+** Motor das computações
+
+- Push :: Movido por dados. Eventos percorrem o grafo e produzem um valor conforme ocorrem.
+- Pull :: Movido por demanda. Um valor é demandado e o grafo é percorrido até as fontes para computá-lo.
+- Push/Pull :: "O melhor dos dois mundos". Eventos internos construídos apenas quando resultado demandado. [fn:wiki-push-pull]
+
+[fn:wiki-push-pull] https://en.wikipedia.org/wiki/Functional_reactive_programming#Implementation_issues, acessado em 12/09/2019.
+
+** Dinamicidade do grafo
+
+- /Classic FRP/
+- /Higher-Order FRP/
+- /Arrowized FRP/
+- /Asynchronous data-flow/
+
 * Elementos básicos
 
 - Comportamentos
@@ -64,6 +81,7 @@ Ertugrul Söylemez (22/09/1985 - 12/05/2018) [fn:söylemez]
 
 - FRP segundo Conal Elliott :: https://stackoverflow.com/a/1030631/2708711
 - Tese do Evan Czaplicki :: https://elm-lang.org/assets/papers/concurrent-frp.pdf
+- Zoológico de bibliotecas FRP :: https://github.com/gelisam/frp-zoo
 
 * Apêndice
 
