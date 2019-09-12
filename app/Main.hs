@@ -46,8 +46,8 @@ width = 640
 height = 480
 pHeight = 20
 pWidth = 20
-vx0 = 20
-vy0 = 30
+vx0 = 50
+vy0 = 0
 
 type MyState = (Wire (Timed NominalDiffTime ()) () IO Vec Vec, Session IO (Timed NominalDiffTime ()), (Float, Float))
 type Vec = (Float, Float)
@@ -63,7 +63,7 @@ loop win state glossState = do
   esc <- keyIsPressed win GLFW.Key'Escape
   let newState = (wire', session', pos'')
   renderFrame pos'' win glossState
-  unless esc $ loop win newState glossState
+  unless (esc || fst pos'' > fromIntegral width / 2) $ loop win newState glossState
 
 renderFrame :: Vec -> GLFW.Window -> GR.State -> IO ()
 renderFrame st win glossState = do
@@ -84,10 +84,8 @@ acceleration = pure (0, 0)
 
 velocity :: (HasTime t s, Monad m) => Wire s () m Vec Vec
 velocity = proc (ax, ay) -> do
-  t  <- time -< ()
-  let t' = realToFrac t
-  vx <- integral vx0 -< t'
-  vy <- integral vy0 -< t'
+  vx <- integral vx0 -< 0
+  vy <- integral vy0 -< 0
   returnA -< (vx, vy)
 
 position :: (HasTime t s, Monad m) => Wire s () m Vec Vec
