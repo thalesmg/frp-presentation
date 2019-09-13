@@ -52,6 +52,18 @@ Adaptado de [[https://www.youtube.com/watch?v=Agu6jipKfYw][Controlling Time and 
 
 * Classificações
 
+*** Como classificar - Problema
+
+Contagem de cliques.
+
+1. Inicia o grafo com a contagem ligada.
+2. Clica 5 vezes.
+3. Muda o grafo de para ignorar cliques.
+4. Clica mais 5 vezes.
+5. Habilita novamente a contagem.
+
+N = 0, 5, 10 ??
+
 ** Motor das computações
 
 - Push :: Movido por dados. Eventos percorrem o grafo e produzem um valor conforme ocorrem.
@@ -64,20 +76,9 @@ Adaptado de [[https://www.youtube.com/watch?v=Agu6jipKfYw][Controlling Time and 
 
 - /Classic FRP ou First Order FRP/
 - /Real-Time FRP e Event-Driven FRP/
-- /Higher Order FRP e Asynchronous Data Flow/
 - /Arrowized FRP/
 
-*** Problema
-
-Contagem de cliques.
-
-1. Inicia o grafo com a contagem ligada.
-2. Clica 5 vezes.
-3. Muda o grafo de para ignorar cliques.
-4. Clica mais 5 vezes.
-5. Habilita novamente a contagem.
-
-N = 0, 5, 10 ??
+# - /Higher Order FRP e Asynchronous Data Flow/
 
 *** Classic FRP ou First Order FRP
 
@@ -96,8 +97,8 @@ Event a = [(Time, a)]
 
 *** \\
 
-- Sinais são contínuos
-- Sinais infinitos
+- Behaviors/eventos são contínuos
+- Behaviors/eventos infinitos
 - Grafos estáticos
 - Síncrono por padrão
 - Pode levar a /space e time leaks/
@@ -106,6 +107,7 @@ Event a = [(Time, a)]
 *** Real-Time FRP e Event-Driven FRP
 
 #+BEGIN_SRC haskell
+-- Equivalência entre eventos / comportamentos
 Event a ~ Behavior (Maybe a)
 
 -- Tipo comum: Sinais
@@ -122,7 +124,8 @@ Signal a = Time -> a
 
 - Procura manter a expressividade do /Classical FRP/ e evitar /space e time leaks/
 - Eventos não são mais usados
-- /Signal Functions/: não são expostas diretamente para o programador
+- /Signal Functions/
+  - Não são expostas diretamente para o programador
 
 #+BEGIN_SRC haskell
 -- Signal a = Time -> a
@@ -153,13 +156,19 @@ https://github.com/gelisam/frp-zoo
 
 http://hackage.haskell.org/package/netwire
 
-** \\
+https://github.com/esoeylemez/netwire
 
-Ertugrul Söylemez (22/09/1985 - 12/05/2018) [fn:söylemez]
+** Ertugrul Söylemez
 
-Último release: 25/03/2018
+22/09/1985 🟊
+
+12/05/2018 ✝ [fn:söylemez]
+
+Último release da ~netwire~: 25/03/2018
 
 [fn:söylemez] https://byorgey.wordpress.com/2018/05/21/ertugrul-soylemez-1985-2018/
+
+** Experimentos: movimentos com aceleração constante em 2D
 
 ** \\
 
@@ -216,9 +225,15 @@ https://github.com/thalesmg/test-haskell-netwire-sdl2
 
 * Referências
 
-- FRP segundo Conal Elliott :: https://stackoverflow.com/a/1030631/2708711
-- Tese do Evan Czaplicki :: https://elm-lang.org/assets/papers/concurrent-frp.pdf
-- Zoológico de bibliotecas FRP :: https://github.com/gelisam/frp-zoo
+- FRP segundo Conal Elliott: https://stackoverflow.com/a/1030631/2708711
+- Paper sobre Arrowized FRP: http://www.cs.yale.edu/homes/hudak/CS429F04/AFPLectureNotes.pdf
+- Tese do Evan Czaplicki: https://elm-lang.org/assets/papers/concurrent-frp.pdf
+- Zoológico de bibliotecas FRP: https://github.com/gelisam/frp-zoo
+- Functional Reactive Programming: https://www.manning.com/books/functional-reactive-programming
+
+* Tufe
+
+🍺
 
 * Apêndice
 
@@ -228,6 +243,8 @@ São duas abstrações para descrever sistemas dinâmicos / concorrência.
 
 CSP é um formalismo para descrever sistemas concorrentes cujos
 processos que o compõem interagem através de eventos de comunicação.[fn:roscoe]
+
+*** \\
 
 Enquanto FRP descreve /comportamentos e eventos/ que dependem
 diretamente do tempo e primitivas para combiná-los em novos

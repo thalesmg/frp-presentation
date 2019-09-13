@@ -139,7 +139,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Robôs <a href="#/fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</li>
 <li>Jogos <a href="#/fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> <a href="#/fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>. <a href="https://linearity.itch.io/peoplemon">Ex.</a></li>
 </ul></section>
-<section><section id="classificações" class="title-slide slide level1"><h1>Classificações</h1></section><section id="motor-das-computações" class="title-slide slide level2"><h2>Motor das computações</h2><dl>
+<section><section id="classificações" class="title-slide slide level1"><h1>Classificações</h1></section><section id="como-classificar---problema" class="slide level3">
+<h3>Como classificar - Problema</h3>
+<p>Contagem de cliques.</p>
+<ol>
+<li>Inicia o grafo com a contagem ligada.</li>
+<li>Clica 5 vezes.</li>
+<li>Muda o grafo de para ignorar cliques.</li>
+<li>Clica mais 5 vezes.</li>
+<li>Habilita novamente a contagem.</li>
+</ol>
+<p>N = 0, 5, 10 ??</p>
+</section><section id="motor-das-computações" class="title-slide slide level2"><h2>Motor das computações</h2><dl>
 <dt>Push</dt>
 <dd>Movido por dados. Eventos percorrem o grafo e produzem um valor conforme ocorrem.
 </dd>
@@ -152,20 +163,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </dl></section><section id="dinamicidade-do-grafo" class="title-slide slide level2"><h2>Dinamicidade do grafo</h2><ul>
 <li><em>Classic FRP ou First Order FRP</em></li>
 <li><em>Real-Time FRP e Event-Driven FRP</em></li>
-<li><em>Higher Order FRP e Asynchronous Data Flow</em></li>
 <li><em>Arrowized FRP</em></li>
-</ul></section><section id="problema" class="slide level3">
-<h3>Problema</h3>
-<p>Contagem de cliques.</p>
-<ol>
-<li>Inicia o grafo com a contagem ligada.</li>
-<li>Clica 5 vezes.</li>
-<li>Muda o grafo de para ignorar cliques.</li>
-<li>Clica mais 5 vezes.</li>
-<li>Habilita novamente a contagem.</li>
-</ol>
-<p>N = 0, 5, 10 ??</p>
-</section><section id="classic-frp-ou-first-order-frp" class="slide level3">
+</ul></section><section id="classic-frp-ou-first-order-frp" class="slide level3">
 <h3>Classic FRP ou First Order FRP</h3>
 <p>Elementos básicos</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">-- | Comportamentos</span></span>
@@ -185,8 +184,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><br />
 </h3>
 <ul>
-<li>Sinais são contínuos</li>
-<li>Sinais infinitos</li>
+<li>Behaviors/eventos são contínuos</li>
+<li>Behaviors/eventos infinitos</li>
 <li>Grafos estáticos</li>
 <li>Síncrono por padrão</li>
 <li>Pode levar a <em>space e time leaks</em></li>
@@ -194,11 +193,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </section><section id="real-time-frp-e-event-driven-frp" class="slide level3">
 <h3>Real-Time FRP e Event-Driven FRP</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1"></a><span class="dt">Event</span> a <span class="op">~</span> <span class="dt">Behavior</span> (<span class="dt">Maybe</span> a)</span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="co">-- Tipo comum: Sinais</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="dt">Signal</span> a <span class="ot">=</span> <span class="dt">Time</span> <span class="ot">-&gt;</span> a</span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co">-- Event ~ Time -&gt; Maybe a</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">-- Equivalência entre eventos / comportamentos</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="dt">Event</span> a <span class="op">~</span> <span class="dt">Behavior</span> (<span class="dt">Maybe</span> a)</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co">-- Tipo comum: Sinais</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="dt">Signal</span> a <span class="ot">=</span> <span class="dt">Time</span> <span class="ot">-&gt;</span> a</span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co">-- Event ~ Time -&gt; Maybe a</span></span></code></pre></div>
 <ul>
 <li>Busca resolver problemas de eficiência</li>
 <li>Custo em expressividade</li>
@@ -210,7 +210,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Procura manter a expressividade do <em>Classical FRP</em> e evitar <em>space e time leaks</em></li>
 <li>Eventos não são mais usados</li>
-<li><em>Signal Functions</em>: não são expostas diretamente para o programador</li>
+<li><em>Signal Functions</em>
+<ul>
+<li>Não são expostas diretamente para o programador</li>
+</ul></li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">-- Signal a = Time -&gt; a</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="co">-- Event  a = Time -&gt; Maybe a</span></span>
@@ -233,9 +236,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>Clojure(script)</strong>: recurrent, reagi, zelkova, re-frame</li>
 <li><strong>JavaScript</strong>: Bacon.js, ReactiveCocoa, Reactive Extensions, Rx.js, Cycle.js</li>
 </ul></section><section id="netwire" class="title-slide slide level2"><h2>Netwire</h2><p><em>Arrowized, continuous, push-based</em></p>
-<p><a href="http://hackage.haskell.org/package/netwire">http://hackage.haskell.org/package/netwire</a></p></section><section id="section-3" class="title-slide slide level2"><h2><br />
-</h2><p>Ertugrul Söylemez (22/09/1985 - 12/05/2018) <a href="#/fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
-<p>Último release: 25/03/2018</p></section><section id="section-4" class="title-slide slide level2"><h2><br />
+<p><a href="http://hackage.haskell.org/package/netwire">http://hackage.haskell.org/package/netwire</a></p>
+<p><a href="https://github.com/esoeylemez/netwire">https://github.com/esoeylemez/netwire</a></p></section><section id="ertugrul-söylemez" class="title-slide slide level2"><h2>Ertugrul Söylemez</h2><p>22/09/1985 🟊</p>
+<p>12/05/2018 ✝ <a href="#/fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<p>Último release da <code>netwire</code>: 25/03/2018</p></section><section id="experimentos-movimentos-com-aceleração-constante-em-2d" class="title-slide slide level2"><h2>Experimentos: movimentos com aceleração constante em 2D</h2></section><section id="section-3" class="title-slide slide level2"><h2><br />
 </h2><span class="math display">\[\begin{equation}
 \vec{a}(t) = \vec{a_0} \\
 
@@ -243,13 +247,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 \vec{s}(t) = \vec{s_0} + \vec{v_0} t + \frac{\vec{a_0} t^2}{2}
 \end{equation}
-\]</span></section><section id="section-5" class="title-slide slide level2"><h2><br />
+\]</span></section><section id="section-4" class="title-slide slide level2"><h2><br />
 </h2><span class="math display">\[\begin{equation}
 \vec{s}(t) = \vec{s}(t_0) + \int_{t_0}^t \vec{v}(t) dt \\
 
 \vec{v}(t) = \vec{v}(t_0) + \int_{t_0}^t \vec{a}(t) dt
 \end{equation}
-\]</span></section><section id="section-6" class="title-slide slide level2"><h2><br />
+\]</span></section><section id="section-5" class="title-slide slide level2"><h2><br />
 </h2><div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1"></a>position <span class="ot">=</span> proc (vx, vy) <span class="ot">-&gt;</span> <span class="kw">do</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a>  sx <span class="ot">&lt;-</span> integral <span class="dv">0</span> <span class="op">-&lt;</span> vx</span>
 <span id="cb4-3"><a href="#cb4-3"></a>  sy <span class="ot">&lt;-</span> integral <span class="dv">0</span> <span class="op">-&lt;</span> vy</span>
@@ -265,20 +269,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \end{equation}
 \]</span>
 <p><a href="https://github.com/thalesmg/test-haskell-netwire-sdl2">https://github.com/thalesmg/test-haskell-netwire-sdl2</a></p></section></section>
-<section id="referências" class="title-slide slide level1"><h1>Referências</h1><dl>
-<dt>FRP segundo Conal Elliott</dt>
-<dd><a href="https://stackoverflow.com/a/1030631/2708711">https://stackoverflow.com/a/1030631/2708711</a>
-</dd>
-<dt>Tese do Evan Czaplicki</dt>
-<dd><a href="https://elm-lang.org/assets/papers/concurrent-frp.pdf">https://elm-lang.org/assets/papers/concurrent-frp.pdf</a>
-</dd>
-<dt>Zoológico de bibliotecas FRP</dt>
-<dd><a href="https://github.com/gelisam/frp-zoo">https://github.com/gelisam/frp-zoo</a>
-</dd>
-</dl></section>
+<section id="referências" class="title-slide slide level1"><h1>Referências</h1><ul>
+<li>FRP segundo Conal Elliott: <a href="https://stackoverflow.com/a/1030631/2708711">https://stackoverflow.com/a/1030631/2708711</a></li>
+<li>Paper sobre Arrowized FRP: <a href="http://www.cs.yale.edu/homes/hudak/CS429F04/AFPLectureNotes.pdf">http://www.cs.yale.edu/homes/hudak/CS429F04/AFPLectureNotes.pdf</a></li>
+<li>Tese do Evan Czaplicki: <a href="https://elm-lang.org/assets/papers/concurrent-frp.pdf">https://elm-lang.org/assets/papers/concurrent-frp.pdf</a></li>
+<li>Zoológico de bibliotecas FRP: <a href="https://github.com/gelisam/frp-zoo">https://github.com/gelisam/frp-zoo</a></li>
+<li>Functional Reactive Programming: <a href="https://www.manning.com/books/functional-reactive-programming">https://www.manning.com/books/functional-reactive-programming</a></li>
+</ul></section>
+<section id="tufe" class="title-slide slide level1"><h1>Tufe</h1><p>🍺</p></section>
 <section><section id="apêndice" class="title-slide slide level1"><h1>Apêndice</h1></section><section id="frp-vs.-csp" class="title-slide slide level2"><h2>FRP vs. CSP</h2><p>São duas abstrações para descrever sistemas dinâmicos / concorrência.</p>
-<p>CSP é um formalismo para descrever sistemas concorrentes cujos processos que o compõem interagem através de eventos de comunicação.<a href="#/fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
-<p>Enquanto FRP descreve <em>comportamentos e eventos</em> que dependem diretamente do tempo e primitivas para combiná-los em novos <em>comportamentos</em>, CSP descreve o <em>alfabeto</em> que <em>processos</em> podem usar para comunicar-se entre si e com o ambiente.</p></section></section>
+<p>CSP é um formalismo para descrever sistemas concorrentes cujos processos que o compõem interagem através de eventos de comunicação.<a href="#/fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p></section><section id="section-6" class="slide level3">
+<h3><br />
+</h3>
+<p>Enquanto FRP descreve <em>comportamentos e eventos</em> que dependem diretamente do tempo e primitivas para combiná-los em novos <em>comportamentos</em>, CSP descreve o <em>alfabeto</em> que <em>processos</em> podem usar para comunicar-se entre si e com o ambiente.</p>
+</section></section>
 <section class="footnotes" role="doc-endnotes">
 <hr />
 <ol>

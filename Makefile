@@ -14,6 +14,7 @@ watch:
 	    $(MAKE) apresentação.html; \
 	  done
 
+.PHONY: dots
 dots: $(DOTS)
 
 %.png: %.dot
