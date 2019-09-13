@@ -1,5 +1,5 @@
 digraph G {
-        user;
+        world;
 
         inputs;
         transformations;
@@ -9,6 +9,6 @@ digraph G {
         inputs -> transformations -> merge;
         inputs -> state -> merge;
 
-        user -> inputs;
-        merge -> user;
+        world -> inputs;
+        merge -> world;
 }
