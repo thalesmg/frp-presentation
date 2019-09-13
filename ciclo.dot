@@ -1,0 +1,18 @@
+digraph G {
+        user;
+
+        subgraph P {
+                inputs;
+                transformations;
+                state;
+                merge;
+                inputs -> transformations -> merge;
+                inputs -> state -> merge;
+
+                label = "Prog";
+                graph[style=dotted];
+        }
+
+        user -> inputs;
+        merge -> user;
+}

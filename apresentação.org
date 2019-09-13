@@ -18,6 +18,7 @@
 *** Criadores
 
 Conal Elliott e Paul Hudak
+
 /Functional Reactive Animation/, ICFP 97.
 
 *** Características
@@ -28,12 +29,20 @@ Conal Elliott e Paul Hudak
 - Pura :: estado (tempo) explícito
 - Componível ::
 
+** \\
+
+#+NAME: fig:ciclo
+#+CAPTION: Ciclo de vida
+[[./ciclo.png]]
+
+Adaptado de [[https://www.youtube.com/watch?v=Agu6jipKfYw][Controlling Time and Space, Evan Czaplicki]]
+
 * Usos
 
-- Música [fn:euterpea] (51:16).
+- Música [fn:euterpea] [[https://youtu.be/xtmo6Bmfahc?t=2994][(51:16)]].
 - Interfaces gráficas [fn:reflex].
 - Robôs [fn:hudak-arrow].
-- Jogos [fn:eulerea] [fn:yampa-game].
+- Jogos [fn:eulerea] [fn:yampa-game]. [[https://linearity.itch.io/peoplemon][Ex.]]
 
 [fn:euterpea] https://youtu.be/xtmo6Bmfahc?t=2994
 [fn:eulerea] https://leanpub.com/gameinhaskell
@@ -41,7 +50,7 @@ Conal Elliott e Paul Hudak
 [fn:reflex] https://reflex-frp.org/
 [fn:hudak-arrow] https://link.springer.com/chapter/10.1007/978-3-540-44833-4_6 e http://www.cs.yale.edu/homes/hudak/CS429F04/AFPLectureNotes.pdf
 
-* Variações
+* Classificações
 
 ** Motor das computações
 
@@ -53,14 +62,27 @@ Conal Elliott e Paul Hudak
 
 ** Dinamicidade do grafo
 
-- /Classic FRP/
-- /Higher-Order FRP/
+- /Classic FRP ou First Order FRP/
+- /Real-Time FRP e Event-Driven FRP/
+- /Higher Order FRP e Asynchronous Data Flow/
 - /Arrowized FRP/
-- /Asynchronous data-flow/
 
-* Elementos básicos
+*** Problema
 
-- Comportamentos
+Contagem de cliques.
+
+1. Inicia o grafo com a contagem ligada.
+2. Clica 5 vezes.
+3. Muda o grafo de para ignorar cliques.
+4. Clica mais 5 vezes.
+5. Habilita novamente a contagem.
+
+N = 0, 5, 10 ??
+
+*** Classic FRP ou First Order FRP
+
+Elementos básicos
+
 #+BEGIN_SRC haskell
 -- | Comportamentos
 Behavior a = Time -> a
@@ -69,13 +91,128 @@ Behavior a = Time -> a
 Event a = [(Time, a)]
 #+END_SRC
 
-* Netwire
+- Behaviors :: posição, velocidade, aceleração, ...
+- Eventos :: cliques, requests HTTP, ...
+
+*** \\
+
+- Sinais são contínuos
+- Sinais infinitos
+- Grafos estáticos
+- Síncrono por padrão
+- Pode levar a /space e time leaks/
+- Nós conectados ao mundo por padrão
+
+*** Real-Time FRP e Event-Driven FRP
+
+#+BEGIN_SRC haskell
+Event a ~ Behavior (Maybe a)
+
+-- Tipo comum: Sinais
+Signal a = Time -> a
+-- Event ~ Time -> Maybe a
+#+END_SRC
+
+- Busca resolver problemas de eficiência
+- Custo em expressividade
+- RT: usa uma linguagem irrestrita subjacente, uma restrita para lidar com sinais
+- ED: não recomputa nada enquanto não houver um evento
+
+*** Arrowized FRP
+
+- Procura manter a expressividade do /Classical FRP/ e evitar /space e time leaks/
+- Eventos não são mais usados
+- /Signal Functions/: não são expostas diretamente para o programador
+
+#+BEGIN_SRC haskell
+-- Signal a = Time -> a
+-- Event  a = Time -> Maybe a
+
+SF a b = Signal a -> Signal b
+#+END_SRC
+
+*** \\
+
+- Sinais são contínuos
+- Sinais infinitos
+- +Sinais são estáticos+
+- Síncrono por padrão
+- +Nós conectados ao mundo por padrão+
+
+* Exemplos
+
+https://github.com/gelisam/frp-zoo
+
+- *Haskell*: artery, auto, DysFRP, elerea, euphoria, FRPNow, grapefruit, machinecell, netwire, varying, ordrea, reactive-bacon, reactive-banana, reflex, Yampa, sodium
+- *Clojure(script)*: recurrent, reagi, zelkova, re-frame
+- *JavaScript*: Bacon.js, ReactiveCocoa, Reactive Extensions, Rx.js, Cycle.js
+
+** Netwire
+
+/Arrowized, continuous, push-based/
+
+http://hackage.haskell.org/package/netwire
+
+** \\
 
 Ertugrul Söylemez (22/09/1985 - 12/05/2018) [fn:söylemez]
 
 Último release: 25/03/2018
 
 [fn:söylemez] https://byorgey.wordpress.com/2018/05/21/ertugrul-soylemez-1985-2018/
+
+** \\
+
+\begin{equation}
+\vec{a}(t) = \vec{a_0} \\
+
+\vec{v}(t) = \vec{v_0} + \vec{a} t \\
+
+\vec{s}(t) = \vec{s_0} + \vec{v_0} t + \frac{\vec{a_0} t^2}{2}
+\end{equation}
+
+** \\
+
+\begin{equation}
+\vec{s}(t) = \vec{s}(t_0) + \int_{t_0}^t \vec{v}(t) dt \\
+
+\vec{v}(t) = \vec{v}(t_0) + \int_{t_0}^t \vec{a}(t) dt
+\end{equation}
+** \\
+
+#+BEGIN_SRC haskell
+position = proc (vx, vy) -> do
+  sx <- integral 0 -< vx
+  sy <- integral 0 -< vy
+  returnA -< (sx, sy)
+
+velocity = proc (ax, ay) -> do
+  vx <- integral vx0 -< ax
+  vy <- integral vy0 -< ay
+  returnA -< (vx, vy)
+#+END_SRC
+
+** Velocidade constante
+
+[[./mru1.gif]]
+
+** Velocidade constante
+
+[[./mru2.gif]]
+
+** Aceleração
+
+[[./acel1.gif]]
+
+** Input de teclado, colisões e atrito
+
+\begin{equation}
+\vec{a}(t) = \vec{a_0} - \alpha \vec{v}(t) \\
+
+0 < \alpha < 1
+\end{equation}
+
+https://github.com/thalesmg/test-haskell-netwire-sdl2
 
 * Referências
 
